@@ -11,6 +11,7 @@ class DensityModel(object):
     def __init__(self,
                  a=0 * units.kg / pow(units.meter, 3),
                  b=0 * units.kg / units.kelvin / pow(units.meter, 3),
+#                 c=0 * units.kg / pow(units.kelvin, 2) / pow(units.meter, 3)
                  model="linear"):
         """
         Initializes the DensityModel object.
@@ -26,7 +27,9 @@ class DensityModel(object):
         self.b = b.to(units.kg / units.kelvin / pow(units.meter, 3))
 
         self.implemented = {'constant': self.constant,
-                            'linear': self.linear}
+                            'linear': self.linear,
+                            'cubic': self.cubic}
+        
 
         if model in self.implemented.keys():
             self.model = model
@@ -66,3 +69,13 @@ class DensityModel(object):
         """
         ret = self.a + self.b * temp
         return ret
+
+#    def cubic(self, temp=0.0 * units.kelvin):
+#        """
+#        Returns a cubic dependence on temperature ($ a + b*temp$ + ...)
+#
+#        :param temp: The temperature of the object
+#        :type temp: float. units of kelvin
+#        """
+#        ret = self.a + (self.b * temp) + (self.c * (temp ** 2)) + (self.d * (temp ** 3))
+#        return ret

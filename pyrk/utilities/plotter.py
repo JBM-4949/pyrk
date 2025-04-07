@@ -75,6 +75,7 @@ def plot_temps_together(x, y, si):
     plt.xlabel("Time [s]")
     plt.ylabel("Temperature [K]")
     plt.title("Temperature of Each Component")
+    plt.ylim([900,1050])
     saveplot("temps", plt, si.plotdir)
 
 
